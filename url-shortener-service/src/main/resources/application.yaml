@@ -1,0 +1,21 @@
+spring:
+  profiles:
+    active: ${urlShortenerServiceAppProfile}
+  application.name: url-shortener-service
+  data:
+    mongodb:
+      uri: ${urlShortenerServiceAppMongoURI}
+      database: ${urlShortenerServiceAppMongoDbName}
+server:
+  servlet:
+    context-path:
+  port: ${urlShortenerServiceAppPort}
+
+host.url: ${hostUrl}
+
+---
+spring:
+  config:
+    activate:
+      on-profile:
+        - prod
