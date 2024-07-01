@@ -5,4 +5,6 @@ import dev.lokeshbisht.url_shortener_service.dto.ApiResponseDto;
 public interface UrlMappingService {
 
     ApiResponseDto<String> shortenUrl(String longUrl);
+
+    String getLongUrl(String shortUrl);
 }

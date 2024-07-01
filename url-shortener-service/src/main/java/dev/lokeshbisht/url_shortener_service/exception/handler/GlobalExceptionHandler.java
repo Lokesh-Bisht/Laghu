@@ -4,6 +4,7 @@ import dev.lokeshbisht.url_shortener_service.constants.ErrorMessages;
 import dev.lokeshbisht.url_shortener_service.dto.ErrorResponseDto;
 import dev.lokeshbisht.url_shortener_service.enums.ErrorCode;
 import dev.lokeshbisht.url_shortener_service.exception.BadRequestException;
+import dev.lokeshbisht.url_shortener_service.exception.UrlNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,12 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponseDto> handleBadRequestException(BadRequestException ex) {
         ErrorResponseDto errorResponseDto = new ErrorResponseDto(ErrorCode.BAD_REQUEST, ex.getMessage());
         return new ResponseEntity<>(errorResponseDto, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(UrlNotFoundException.class)
+    public ResponseEntity<ErrorResponseDto> handleUrlNotFoundException(UrlNotFoundException ex) {
+        ErrorResponseDto errorResponseDto = new ErrorResponseDto(ErrorCode.URL_NOT_FOUND, ex.getMessage());
+        return  new ResponseEntity<>(errorResponseDto, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(IllegalArgumentException.class)

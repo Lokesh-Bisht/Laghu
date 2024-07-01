@@ -10,4 +10,6 @@ import java.util.Optional;
 public interface UrlMappingRepository extends MongoRepository<UrlMapping, String> {
 
     Optional<UrlMapping> findByLongUrl(String longUrl);
+
+    Optional<UrlMapping> findByShortUrl(String shortUrl);
 }
