@@ -3,6 +3,7 @@ import { Button, Stack, TextField, Typography } from '@mui/material';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import Card from '../components/Card';
+import URLShortenerModal from '../components/URLShortenerModal';
 
 function Home() {
   const [cardStyle, setCardStyle] = useState({
@@ -11,8 +12,17 @@ function Home() {
     border: '2px solid black',
     '&:hover': { cursor: 'pointer' }
   });
+  const [showModal, setShowModal] = useState(false);
 
   function handleClick() {
+    setShowModal(true);
+  }
+
+  function handleClose() {
+    setShowModal(false);
+  }
+
+  function handleClickOnCard() {
     setCardStyle((prevState) => ({
       ...prevState,
       color: 'white',
@@ -23,7 +33,7 @@ function Home() {
   return (
     <>
       <NavBar />
-      <Stack p={5} alignItems='center' sx={{ backgroundColor: '#645394' }}>
+      <Stack p={5} alignItems='center' sx={{ backgroundColor: 'white' }}>
         <img
           src="https://cdn.pixabay.com/photo/2024/03/04/16/44/barberry-8612696_1280.jpg"
           style={{ position: 'relative', width: '650px', height: '350px', borderRadius: '12px' }}
@@ -58,6 +68,7 @@ function Home() {
                 textTransform: 'none',
                 borderRadius: '0 8px 8px 0',
                 '&:hover': { backgroundColor: '#645394', border: 'none' } }}
+              onClick={handleClick}
             >
               Shorten
             </Button>
@@ -98,17 +109,23 @@ function Home() {
           <Card key={1}
             title='Shorten URLs' description='It is a long established fact that a reader will be distracted by
               the readable content of a page when looking at its layout. The point
-              of using Lorem Ipsum is' iconName='link' style={cardStyle} onClick={handleClick} />
+              of using Lorem Ipsum is' iconName='link' style={cardStyle} onClick={handleClickOnCard} />
           <Card key={2}
             title='Shorten URLs' description='It is a long established fact that a reader will be distracted by
               the readable content of a page when looking at its layout. The point
-              of using Lorem Ipsum is' iconName='key' style={cardStyle} onClick={handleClick} />
+              of using Lorem Ipsum is' iconName='key' style={cardStyle} onClick={handleClickOnCard} />
           <Card key={3}
             title='Shorten URLs' description='It is a long established fact that a reader will be distracted by
               the readable content of a page when looking at its layout. The point
-              of using Lorem Ipsum is' iconName='gear' style={cardStyle} onClick={handleClick} />
+              of using Lorem Ipsum is' iconName='gear' style={cardStyle} onClick={handleClickOnCard} />
         </Stack>
       </Stack>
+      <URLShortenerModal
+        title='hello'
+        description='https://www.laghu.com/abcd'
+        showModal={showModal}
+        handleClose={handleClose}
+      />;
       <Footer />
     </>
   );
