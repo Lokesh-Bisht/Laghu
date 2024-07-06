@@ -60,7 +60,7 @@ const URLShortenerModal = ({ title, description, showModal, handleClose }) => {
 URLShortenerModal.propTypes = {
   title: Proptypes.string,
   description: Proptypes.string,
-  showModal: Proptypes.boolean,
+  showModal: Proptypes.bool,
   handleClose: Proptypes.func
 };
 
