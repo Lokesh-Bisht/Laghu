@@ -6,9 +6,9 @@ import KeyIcon from '@mui/icons-material/Key';
 import Proptypes from 'prop-types';
 
 const Card = (props) => {
-  const { key, title, description, iconName, style, onClick } = props;
+  const { id, title, description, iconName, style, onClick } = props;
   return (
-    <Stack key={key} p={3} sx={ style } width={280} height={300} onClick={onClick}>
+    <Stack key={id} p={3} sx={ style } width={280} height={300} onClick={onClick}>
       { iconName === 'link' && <LinkIcon fontSize='large' /> }
       { iconName === 'key' && <KeyIcon fontSize='large' /> }
       { iconName === 'gear' && <SettingsIcon fontSize='large' /> }
@@ -19,7 +19,7 @@ const Card = (props) => {
 };
 
 Card.propTypes = {
-  key: Proptypes.string.isRequired,
+  id: Proptypes.number,
   title: Proptypes.string.isRequired,
   description: Proptypes.string.isRequired,
   iconName: Proptypes.string.isRequired,

@@ -3,6 +3,8 @@ import { Button, Stack, TextField, Typography } from '@mui/material';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import Card from '../components/Card';
+import URLShortenerModal from '../components/URLShortenerModal';
+import { shortenURL } from '../service/UrlShortenerService';
 
 function Home() {
   const [cardStyle, setCardStyle] = useState({
@@ -11,8 +13,32 @@ function Home() {
     border: '2px solid black',
     '&:hover': { cursor: 'pointer' }
   });
+  const [showModal, setShowModal] = useState(false);
+  const [url, setUrl] = useState('');
+  const [shortenUrl, setShortenUrl] = useState('');
 
-  function handleClick() {
+  function handleOnChange(event) {
+    const { value } = event.target;
+    setUrl(value);
+  }
+
+  async function handleClick() {
+    try {
+      const res = await shortenURL(url);
+      if (res) {
+        setShortenUrl(res.data);
+        setShowModal(true);
+      }
+    } catch (err) {
+      alert(err);
+    }
+  }
+
+  function handleClose() {
+    setShowModal(false);
+  }
+
+  function handleClickOnCard() {
     setCardStyle((prevState) => ({
       ...prevState,
       color: 'white',
@@ -23,7 +49,7 @@ function Home() {
   return (
     <>
       <NavBar />
-      <Stack p={5} alignItems='center' sx={{ backgroundColor: '#645394' }}>
+      <Stack p={5} alignItems='center' sx={{ backgroundColor: 'white' }}>
         <img
           src="https://cdn.pixabay.com/photo/2024/03/04/16/44/barberry-8612696_1280.jpg"
           style={{ position: 'relative', width: '650px', height: '350px', borderRadius: '12px' }}
@@ -48,6 +74,7 @@ function Home() {
               fullWidth
               type='text'
               color='primary'
+              onChange={handleOnChange}
               sx={{ backgroundColor: 'white', borderRadius: '8px 3px 3px 8px' }}
             />
             <Button
@@ -58,6 +85,7 @@ function Home() {
                 textTransform: 'none',
                 borderRadius: '0 8px 8px 0',
                 '&:hover': { backgroundColor: '#645394', border: 'none' } }}
+              onClick={handleClick}
             >
               Shorten
             </Button>
@@ -95,20 +123,26 @@ function Home() {
         <span style={{ fontWeight: 'bold', color: '#645394' }}>Features</span> - What We Offer
       </Typography>
         <Stack direction='row' backgroundColor='white' m='auto' spacing={4}>
-          <Card key={1}
+          <Card id={1}
             title='Shorten URLs' description='It is a long established fact that a reader will be distracted by
               the readable content of a page when looking at its layout. The point
-              of using Lorem Ipsum is' iconName='link' style={cardStyle} onClick={handleClick} />
-          <Card key={2}
+              of using Lorem Ipsum is' iconName='link' style={cardStyle} onClick={handleClickOnCard} />
+          <Card id={2}
             title='Shorten URLs' description='It is a long established fact that a reader will be distracted by
               the readable content of a page when looking at its layout. The point
-              of using Lorem Ipsum is' iconName='key' style={cardStyle} onClick={handleClick} />
-          <Card key={3}
+              of using Lorem Ipsum is' iconName='key' style={cardStyle} onClick={handleClickOnCard} />
+          <Card id={3}
             title='Shorten URLs' description='It is a long established fact that a reader will be distracted by
               the readable content of a page when looking at its layout. The point
-              of using Lorem Ipsum is' iconName='gear' style={cardStyle} onClick={handleClick} />
+              of using Lorem Ipsum is' iconName='gear' style={cardStyle} onClick={handleClickOnCard} />
         </Stack>
       </Stack>
+      <URLShortenerModal
+        title='Get a shortened URL'
+        description={shortenUrl}
+        showModal={showModal}
+        handleClose={handleClose}
+      />;
       <Footer />
     </>
   );
