@@ -1,13 +1,48 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import { Divider, IconButton, Stack, Typography } from '@mui/material';
+import { Divider, IconButton, Link, Stack, Typography } from '@mui/material';
 
 function Footer() {
   return (
     <>
       <Stack p={2} backgroundColor='rgb(22, 27, 34)' color='white'>
-        <Typography>URL Shortener</Typography>
+        <Stack direction='row' m={2}>
+          <Typography variant='h4' >
+            Laghu
+          </Typography>
+          <Link
+            mt={2}
+            ml={6.5}
+            underline='none'
+            color='white'
+            fontWeight='500'
+            textAlign='justify'
+            href='#'
+          >
+            Home
+          </Link>
+          <Link
+            mt={2}
+            ml={2.5}
+            underline='none'
+            color='white'
+            fontWeight='500'
+            href='#'
+          >
+            About Us
+          </Link>
+          <Link
+            mt={2}
+            ml={2.5}
+            underline='none'
+            fontWeight='500'
+            color='white'
+            href='#'
+          >
+            Contact
+          </Link>
+        </Stack>
         <Divider ml='12px' color='white'></Divider>
       </Stack>
       <Stack direction='row' p={2} backgroundColor='rgb(22, 27, 34)'>

@@ -1,4 +1,4 @@
-import { Stack, Typography } from '@mui/material';
+import { Link, Stack, Typography } from '@mui/material';
 
 function NavBar() {
   return (
@@ -10,16 +10,30 @@ function NavBar() {
       >
         Laghu
       </Typography>
-      <Typography
+      <Link
         sx={{ ml: 10, mt: 1.5 }}
+        underline='none'
+        color='black'
+        href='#home-page-why-laghu'
       >
         Why Laghu?
-      </Typography>
-      <Typography
+      </Link>
+      <Link
         sx={{ ml: 5, mt: 1.5 }}
+        underline='none'
+        color='black'
+        href='#home-page-features'
       >
         Features
-      </Typography>
+      </Link>
+      <Link
+        sx={{ ml: 5, mt: 1.5 }}
+        underline='none'
+        color='black'
+        href='#home-page-how-it-works'
+      >
+        How it works?
+      </Link>
     </Stack>
   );
 }
