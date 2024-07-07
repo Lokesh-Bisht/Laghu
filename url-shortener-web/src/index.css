@@ -5,6 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* To avoid bounce at the top and end of the page */
+  overscroll-behavior: none;  
 }
 
 code {
